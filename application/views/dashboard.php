@@ -16,7 +16,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h1 style="padding: 9px" class="mb-3"><b> Selamat Datang di Sekolah Menengah Keatas 1 Bambu</b></h1>
-                                <h4 style="padding: 5px" class="mb-3">Sekolah terakreditasi- <i>A</i> Dengan menjunjung tinggi rasa kekeluargaan</h4>
+                                <h4 style="padding: 5px" class="mb-3">Sekolah terakreditasi-<b> A</b> Dengan menjunjung tinggi rasa kekeluargaan</h4>
                                 <h5><b> Visi Misi SMK 1 Bambu </b>
 
                                     <li><b><i>Visi</i></b>
