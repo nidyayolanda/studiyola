@@ -1,0 +1,113 @@
+<?php
+            include 'koneksi.php';
+            if (isset($_POST["ok"])){
+              
+                $id_pengaduan = $_POST["id_pengaduan"];
+				
+                $tgl_tanggapan = $_POST["tgl_tanggapan"];
+                $tanggapan = $_POST["tanggapan"];
+                $input = mysqli_query($koneksi, "insert into tanggapan (id_pengaduan, tgl_tanggapan, tanggapan) values ('$id_pengaduan','$tgl_tanggapan', '$tanggapan')");
+                echo "<div class='alert alert-success'>TANGGAPAN SUKSES! </div>";
+            }
+            ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Pengaduan Masyarakat</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient( rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url(neon.jpg);
+            font-family: 'Source Sans Pro', sans-serif;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #66CDAA;
+            color: black;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-right: 10px; /* Added margin to separate buttons */
+        }
+
+        button:hover {
+            background-color: #F0E68C;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>FORM TANGGAPAN PENGADUAN</h1>
+    <div class="form-container">
+	<?php
+    if (isset($_GET['id_pengaduan'])){
+        $id_pengaduan = $_GET['id_pengaduan'];
+    }
+    else{
+        die ("error. NO ID Selected!");
+    }
+    include 'koneksi.php';
+    $no = 1;
+    $query = mysqli_query($koneksi, "SELECT * FROM pengaduan WHERE id_pengaduan ='$id_pengaduan'");
+    foreach ($query as $row) {
+
+    ?>
+            <br>
+        <form action="" method="post">
+		
+        <label for="id_pengaduan">ID Pengaduan:</label>
+            <input type="number" id="id_pengaduan" name="id_pengaduan" value="<?php echo $row['id_pengaduan']; ?>" >
+            <label for="tgl_pengaduan">Tanggal Pengaduan:</label>
+            <input type="text" id="tgl_pengaduan" name="tgl_pengaduan"  value="<?php echo date('d F Y', strtotime($row['tgl_pengaduan']));?>"/> 
+            <label for="isi_laporan">Isi Laporan:</label>
+            <input type="text" id="isi_laporan" name="isi_laporan" value="<?php echo $row['isi_laporan']; ?>" >
+            <label for="tgl_tanggapan">Tanggal Tanggapan:</label>
+            <input type="date" id="tgl_tanggapan" name="tgl_tanggapan" required>
+            <label for="tanggapan">Tanggapan:</label>
+            <textarea id="tanggapan" name="tanggapan" rows="5" cols="100" required></textarea>
+            
+<br>
+
+           <center><button type="submit" name="ok">Submit</button></center>
+           <BR>
+           <center><a href="tbltanggapan.php" target="_blank"><button type="button">Lihat Tanggapan Lainnya</button></a></center> 
+		  <?php }?>
+		</form>
+    </div>   
+</body>
+</html>
+
+
+
+
